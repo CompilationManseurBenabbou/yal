@@ -1,5 +1,7 @@
 package yal.arbre.expression;
 
+import yal.exceptions.AnalyseSemantiqueException;
+
 /**
  * 3 déc. 2015
  *
@@ -10,6 +12,7 @@ public class NonLogique extends Unaire {
     
     public NonLogique(Expression expr) {
         super(expr);
+        type="bool";
     }
 
     @Override
@@ -19,14 +22,14 @@ public class NonLogique extends Unaire {
 
     @Override
     public void verifier() {
-
+        if (!(expression.getType()=="bool")) throw new AnalyseSemantiqueException("Le type de l'opperande n'est pas binaire");
     }
 
     @Override
     public String toMIPS() {
-        if (expression.equals(true)) {
-            return "li $0,0";
+        if (expression.equals("vrai")) {
+            return "0";
         }
-        return "li $0,1";
+        return "1";
     }
 }

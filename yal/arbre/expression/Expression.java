@@ -14,4 +14,14 @@ public abstract class Expression extends ArbreAbstrait {
         super(n) ;
     }
 
+    protected String type;
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
 }
+

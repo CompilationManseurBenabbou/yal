@@ -1,7 +1,7 @@
 package yal.exceptions;
 
-public class AnalyseSemantique extends AnalyseException {
-    protected AnalyseSemantique(String m) {
-        super(m);
+public class AnalyseSemantiqueException extends AnalyseException {
+    public AnalyseSemantiqueException(String m) {
+        super("Analyse Semantique exception : "+m);
     }
 }
