@@ -21,7 +21,14 @@ public class Moins extends BinaireArithmetique {
     }
 
     @Override
+    public int getValue() {
+        return gauche.getValue()-droite.getValue();
+    }
+
+    @Override
     public void verifier() {
+        gauche.verifier();
+        droite.verifier();
         if (!(gauche.getType() == droite.getType()&&gauche.getType()=="entier"))
             throw new AnalyseSemantiqueException("Les opperandes ne sont pas du meme type");
     }

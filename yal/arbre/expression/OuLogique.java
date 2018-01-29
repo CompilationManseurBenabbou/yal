@@ -21,6 +21,11 @@ public class OuLogique extends BinaireLogique {
     }
 
     @Override
+    public int getValue() {
+        return 0;
+    }
+
+    @Override
     public void verifier() {
         if (!(gauche.getType() == droite.getType()&&gauche.getType()=="bool"))
             throw new AnalyseSemantiqueException("L'un ou les opperandes ne sont pas de type boolean");

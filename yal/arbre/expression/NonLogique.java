@@ -21,15 +21,27 @@ public class NonLogique extends Unaire {
     }
 
     @Override
+    public int getValue() {
+        return 0;
+    }
+
+    @Override
     public void verifier() {
         if (!(expression.getType()=="bool")) throw new AnalyseSemantiqueException("Le type de l'opperande n'est pas binaire");
     }
 
     @Override
     public String toMIPS() {
-        if (expression.equals("vrai")) {
-            return "0";
-        }
-        return "1";
+
+        StringBuilder sb=new StringBuilder();
+        sb.append(
+                expression.toMIPS()+"\n"+
+                        "beq $v0,0,res"+incr+"\n" +
+                        "li,$v0,0\n"+
+                        "j continuer"+incr+"\n"+
+                        "res"+incr+": li,$v0,1\n"+
+                        "continuer"+incr+" :\n");
+
+        return sb.toString();
     }
 }

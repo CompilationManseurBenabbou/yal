@@ -1,5 +1,7 @@
 package yal.arbre.expression;
 
+import yal.exceptions.AnalyseSemantiqueException;
+
 /**
  * 3 déc. 2015
  *
@@ -10,6 +12,7 @@ public class Different extends Comparaison {
 
     public Different(Expression gauche, Expression droite) {
         super(gauche, droite);
+        type="bool";
     }
 
     @Override
@@ -18,8 +21,14 @@ public class Different extends Comparaison {
     }
 
     @Override
-    public void verifier() {
+    public int getValue() {
+        return 0;
+    }
 
+    @Override
+    public void verifier() {
+        if (!(gauche.getType() == droite.getType()))
+        throw new AnalyseSemantiqueException("Les opperandes ne sont pas du meme type");
     }
 
     @Override

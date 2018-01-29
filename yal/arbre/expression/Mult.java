@@ -21,6 +21,11 @@ public class Mult extends BinaireArithmetique {
     }
 
     @Override
+    public int getValue() {
+        return gauche.getValue()*droite.getValue();
+    }
+
+    @Override
     public void verifier() {
         if (!(gauche.getType() == droite.getType()&&gauche.getType()=="entier"))
             throw new AnalyseSemantiqueException("Les opperandes ne sont pas du meme type");
@@ -35,5 +40,6 @@ public class Mult extends BinaireArithmetique {
                 "add $sp,$sp,4"+"\n"+//Deplacement du curseur vers l'op gauche
                 "lw $t8,0($sp)"+"\n"+ //Chargement de l'op gauche dans t8
                 "mul $v0,$t8,$v0\n";// Realisation de l'addition;
+
     }
 }

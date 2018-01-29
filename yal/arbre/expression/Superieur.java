@@ -10,11 +10,17 @@ public class Superieur extends Comparaison {
 
     public Superieur(Expression gauche, Expression droite) {
         super(gauche, droite);
+        type="bool";
     }
 
     @Override
     public String operateur() {
         return " > ";
+    }
+
+    @Override
+    public int getValue() {
+        return 0;
     }
 
     @Override

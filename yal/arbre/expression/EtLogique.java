@@ -22,6 +22,11 @@ public class EtLogique extends BinaireLogique {
     }
 
     @Override
+    public int getValue() {
+        return 0;
+    }
+
+    @Override
     public void verifier() {
         if (!(gauche.getType() == droite.getType()&&gauche.getType()=="bool"))
             throw new AnalyseSemantiqueException("Les opperandes ne sont pas du meme type");

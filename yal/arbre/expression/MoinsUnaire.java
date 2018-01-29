@@ -21,6 +21,11 @@ public class MoinsUnaire extends Unaire {
     }
 
     @Override
+    public int getValue() {
+        return -expression.getValue();
+    }
+
+    @Override
     public void verifier() {
         if (!(expression.getType()=="entier")) throw  new AnalyseSemantiqueException("Le type de l'opperande n'est pas un entier");
     }

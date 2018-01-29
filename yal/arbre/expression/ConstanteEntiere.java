@@ -14,6 +14,11 @@ public class ConstanteEntiere extends Constante {
     }
 
     @Override
+    public int getValue() {
+        return Integer.parseInt(cste);
+    }
+
+    @Override
     public void verifier() {
 
     }

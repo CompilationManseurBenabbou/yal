@@ -22,6 +22,11 @@ public class Plus extends BinaireArithmetique {
     }
 
     @Override
+    public int getValue() {
+        return gauche.getValue()+gauche.getValue();
+    }
+
+    @Override
     public void verifier() {
 
         if (!(gauche.getType() == droite.getType()&&gauche.getType()=="entier"))

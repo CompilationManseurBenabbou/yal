@@ -12,12 +12,17 @@ public class Inferieur extends Comparaison {
 
     public Inferieur(Expression gauche, Expression droite) {
         super(gauche, droite);
-        type="entier";
+        type="bool";
     }
 
     @Override
     public String operateur() {
         return " < ";
+    }
+
+    @Override
+    public int getValue() {
+        return 0;
     }
 
     @Override

@@ -15,6 +15,11 @@ public class ConstanteBool extends Constante {
     }
 
     @Override
+    public int getValue() {
+        return 0;
+    }
+
+    @Override
     public void verifier() {
     }
 

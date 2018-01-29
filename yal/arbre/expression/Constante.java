@@ -15,6 +15,7 @@ public abstract class Constante extends Expression {
         cste = texte ;
     }
 
+
     @Override
     public String toString() {
         return cste ;
