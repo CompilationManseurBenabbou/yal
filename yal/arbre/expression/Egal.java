@@ -27,8 +27,12 @@ public class Egal extends Comparaison {
 
     @Override
     public void verifier() {
+        gauche.verifier();
+        droite.verifier();
         if (!(gauche.getType() == droite.getType()))
-            throw new AnalyseSemantiqueException("Les opperandes ne sont pas du meme type");
+            throw new AnalyseSemantiqueException("Les opperandes ne sont pas du meme type\n"+
+                    "L'opperande gauche est de type : "+gauche.getType()+"\n"+
+                    "L'opperande droite est de type : "+droite.getType());
     }
 
     @Override
@@ -41,11 +45,11 @@ public class Egal extends Comparaison {
             droite.toMIPS()+"\n"+//Evaluation de l'op Droite
             "add $sp,$sp,4"+"\n"+//Deplacement du curseur vers l'op gauche
             "lw $t8,0($sp)"+"\n"+ //Chargement de l'op gauche dans t8
-            "beq $v0,$t8,suite"+incr+"\n"+
-            "li $v0,0\n" +
-            "j continuer"+incr+"\n"+
-            "suite"+incr+": li $v0,1\n" +
-            "continuer"+incr+" :\n");// Realisation de l'addition;);
+            "beq $v0,$t8,suite"+incr+"\n"+//Si l'op gauche est egale à l'op droite
+            "li $v0,0\n" +//Sinon
+            "j fsi"+incr+"\n"+//Jump
+            "suite"+incr+": li $v0,1\n" +//Alors
+            "fsi"+incr+" :\n");//
     incr++;
         return sb.toString();
 

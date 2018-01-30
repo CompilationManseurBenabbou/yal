@@ -1,7 +1,6 @@
 package yal ;
 
-import java.io.FileNotFoundException;
-import java.io.FileReader;
+import java.io.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import yal.analyse.AnalyseurLexical;
@@ -21,13 +20,14 @@ public class Yal {
         try {
             AnalyseurSyntaxique analyseur = new AnalyseurSyntaxique(new AnalyseurLexical(new FileReader(fichier)));
             ArbreAbstrait arbre = (ArbreAbstrait) analyseur.parse().value;
-            System.err.println("expression stockée dans l'arbre : " + arbre);
-            
+            //System.err.println("expression stockée dans l'arbre : " + arbre);
+
             // à écrire pour yal0
              arbre.verifier() ;
-             System.out.println(arbre.toMIPS());
+             //System.out.println(arbre.toMIPS());
+            tofichier(arbre.toMIPS(),fichier);
              System.out.println("Compilation OK");
-        } 
+        }
         catch (FileNotFoundException ex) {
             System.err.println("Fichier " + fichier + " inexistant") ;
         }
@@ -38,7 +38,18 @@ public class Yal {
             Logger.getLogger(Yal.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+    public static void tofichier(String expression,String nomfichier){
+       nomfichier=nomfichier.substring(0,nomfichier.length()-4)+".mips";
+        try {
+            FileWriter fw = new FileWriter(nomfichier);
+            BufferedWriter output = new BufferedWriter(fw);
+            output.write(expression);
+            output.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
+    }
     public static void main(String[] args) {
         if (args.length != 1) {
             System.err.println("Nombre incorrect d'arguments") ;

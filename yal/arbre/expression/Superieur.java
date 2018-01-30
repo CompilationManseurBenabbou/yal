@@ -1,5 +1,7 @@
 package yal.arbre.expression;
 
+import yal.exceptions.AnalyseSemantiqueException;
+
 /**
  * 3 déc. 2015
  *
@@ -25,17 +27,26 @@ public class Superieur extends Comparaison {
 
     @Override
     public void verifier() {
-
+        gauche.verifier();
+        droite.verifier();
+        if (!(gauche.getType() == droite.getType()&&gauche.getType()=="entier")&&gauche.getType()!="bool")
+            throw new AnalyseSemantiqueException("Les opperandes ne sont pas du meme type\n"+
+                    "L'opperande gauche est de type : "+gauche.getType()+"\n"+
+                    "L'opperande droite est de type : "+droite.getType());
+        else if(gauche.getType() == droite.getType()&&gauche.getType()=="bool")
+            throw new AnalyseSemantiqueException("Les opperandes sont de type boolean");
     }
 
     @Override
     public String toMIPS() {
-        return  droite.toMIPS()+"\n"+// Evaluation de l'op gauche
+        StringBuilder sb = new StringBuilder();
+        sb.append(droite.toMIPS()+"\n"+// Evaluation de l'op gauche
                 "sw $v0,0($sp)"+"\n"+//empilation de l'op gauche
                 "add $sp,$sp,-4"+"\n"+//Deplacement du curseur d'une case
                 gauche.toMIPS()+"\n"+//Evaluation de l'op Droite
                 "add $sp,$sp,4"+"\n"+//Deplacement du curseur vers l'op gauche
                 "lw $t8,0($sp)"+"\n"+ //Chargement de l'op gauche dans t8
-                "slt $v0,$t8,$v0\n";// Realisation de l'addition;;
+                "slt $v0,$t8,$v0\n");// Realisation de l'opperateur Supperieur
+        return sb.toString();
     }
 }

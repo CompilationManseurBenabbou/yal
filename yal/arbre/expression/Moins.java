@@ -30,17 +30,21 @@ public class Moins extends BinaireArithmetique {
         gauche.verifier();
         droite.verifier();
         if (!(gauche.getType() == droite.getType()&&gauche.getType()=="entier"))
-            throw new AnalyseSemantiqueException("Les opperandes ne sont pas du meme type");
+            throw new AnalyseSemantiqueException("Les opperandes ne sont pas du meme type\n"+
+                    "L'opperande gauche est de type : "+gauche.getType()+"\n"+
+                    "L'opperande droite est de type : "+droite.getType());
     }
 
     @Override
     public String toMIPS() {
-        return  gauche.toMIPS()+"\n"+// Evaluation de l'op gauche
+        StringBuilder sb = new StringBuilder();
+        sb.append(gauche.toMIPS()+"\n"+// Evaluation de l'op gauche
                 "sw $v0,0($sp)"+"\n"+//empilation de l'op gauche
                 "add $sp,$sp,-4"+"\n"+//Deplacement du curseur d'une case
                 droite.toMIPS()+"\n"+//Evaluation de l'op Droite
                 "add $sp,$sp,4"+"\n"+//Deplacement du curseur vers l'op gauche
                 "lw $t8,0($sp)"+"\n"+ //Chargement de l'op gauche dans t8
-                "sub $v0,$t8,$v0\n";// Realisation de l'addition
+                "sub $v0,$t8,$v0\n");// Realisation de la soustraction
+        return sb.toString();
     }
 }

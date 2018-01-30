@@ -27,6 +27,7 @@ public class NonLogique extends Unaire {
 
     @Override
     public void verifier() {
+        expression.verifier();
         if (!(expression.getType()=="bool")) throw new AnalyseSemantiqueException("Le type de l'opperande n'est pas binaire");
     }
 
@@ -35,13 +36,13 @@ public class NonLogique extends Unaire {
 
         StringBuilder sb=new StringBuilder();
         sb.append(
-                expression.toMIPS()+"\n"+
-                        "beq $v0,0,res"+incr+"\n" +
-                        "li,$v0,0\n"+
-                        "j continuer"+incr+"\n"+
-                        "res"+incr+": li,$v0,1\n"+
-                        "continuer"+incr+" :\n");
-
+                expression.toMIPS()+"\n"+//Evaluation de l'op
+                        "beq $v0,0,res"+incr+"\n" +//si l'op est egal à 0
+                        "li,$v0,0\n"+//Sinon = 1
+                        "j continuer"+incr+"\n"+//Jump
+                        "res"+incr+": li,$v0,1\n"+// Alors = 1
+                        "continuer"+incr+" :\n");//Fin
+        incr++;
         return sb.toString();
     }
 }

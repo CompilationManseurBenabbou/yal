@@ -10,10 +10,11 @@ public class ConstanteEntiere extends Constante {
     
     public ConstanteEntiere(String texte, int n) {
         super(texte, n) ;
-        type="entier";
+        type="entier"; //Assignation du type entier pour toutes les constants booleans
     }
 
     @Override
+    //Recuperation de la veleur de du String cste
     public int getValue() {
         return Integer.parseInt(cste);
     }

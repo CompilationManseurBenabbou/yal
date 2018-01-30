@@ -1,1 +1,1 @@
-faux == (faux == (faux == vrai))
+vrai == (faux == (faux == vrai))
